@@ -1,20 +1,47 @@
 package br.com.costalavos.model.pedido;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Cabecalho {
 
     private char bloqueado;
+
+    @JsonProperty("codigo_cenario_impostos")
     private String codigoCenarioImpostos;
+
+    @JsonProperty("codigo_cliente")
     private int codigoCliente;
+
+    @JsonProperty("codigo_empresa")
     private int codigoEmpresa;
-    private String parcela;
+
+    @JsonProperty("codigo_parcela")
+    private String codigoParcela;
+
+    @JsonProperty("codigo_pedido")
     private int codigoPedido;
+
+    @JsonProperty("codigo_pedido_integracao")
     private int codigoPedidoIntegracao;
+
+    @JsonProperty("data_previsao")
     private String dataPrevisao;
+
     private String etapa;
+
+    @JsonProperty("importado_api")
     private String importadoApi;
+
+    @JsonProperty("numero_pedido")
     private String numeroPedido;
-    private String origemProduto;
+
+    @JsonProperty("origem_pedido")
+    private String origemPedido;
+
+    @JsonProperty("qtde_parcelas")
     private int quantidadeParcelas;
+
+    @JsonProperty("quantidade_itens")
     private int quantidadeItens;
 
     public char getBloqueado() {
@@ -49,12 +76,12 @@ public class Cabecalho {
         this.codigoEmpresa = codigoEmpresa;
     }
 
-    public String getParcela() {
-        return parcela;
+    public String getCodigoParcela() {
+        return codigoParcela;
     }
 
-    public void setParcela(String parcela) {
-        this.parcela = parcela;
+    public void setCodigoParcela(String codigoParcela) {
+        this.codigoParcela = codigoParcela;
     }
 
     public int getCodigoPedido() {
@@ -105,12 +132,12 @@ public class Cabecalho {
         this.numeroPedido = numeroPedido;
     }
 
-    public String getOrigemProduto() {
-        return origemProduto;
+    public String getOrigemPedido() {
+        return origemPedido;
     }
 
-    public void setOrigemProduto(String origemProduto) {
-        this.origemProduto = origemProduto;
+    public void setOrigemPedido(String origemPedido) {
+        this.origemPedido = origemPedido;
     }
 
     public int getQuantidadeParcelas() {

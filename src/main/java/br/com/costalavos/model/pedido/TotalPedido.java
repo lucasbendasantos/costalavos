@@ -1,9 +1,16 @@
 package br.com.costalavos.model.pedido;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TotalPedido {
 
+    @JsonProperty("valor_descontos")
     private double valorDescontos;
+
+    @JsonProperty("valor_mercadorias")
     private double valorMercadorias;
+
+    @JsonProperty("valor_total_pedido")
     private double valorTotalPedido;
 
     public double getValorDescontos() {
