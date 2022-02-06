@@ -9,6 +9,7 @@ import br.com.costalavos.util.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -21,7 +22,8 @@ public class PedidoService {
     ClienteService clienteService;
 
     public PedidoVendaProdutoLista listarTodos(Paginacao paginacao){
-        return (PedidoVendaProdutoLista) httpClient.post("/produtos/pedido/", paginacao, "ListarPedidos", PedidoVendaProdutoLista.class).getBody();
+        PedidoVendaProdutoLista listaPedido = (PedidoVendaProdutoLista) httpClient.post("/produtos/pedido/", paginacao, "ListarPedidos", PedidoVendaProdutoLista.class).getBody();
+        return incluirClienteListaPedido(listaPedido);
     }
 
     public PedidoVendaProduto consultarPedido(int codigoPedido){
@@ -30,12 +32,27 @@ public class PedidoService {
 
         PedidoVendaProduto pedido = (PedidoVendaProduto) httpClient.post("/produtos/pedido/", request, "ConsultarPedido", PedidoVendaProduto.class).getBody();
 
-        Cliente cliente = clienteService.consultarCliente(pedido.getPedidoResponse().getCabecalho().getCodigoCliente());
-
-        pedido.setCliente(cliente);
-
+        Cliente cliente = buscarCliente(pedido.getPedidoResponse().getCabecalho().getCodigoCliente());
+        PedidoResponse pedidoResponse = pedido.getPedidoResponse();
+        pedidoResponse.setCliente(cliente);
+        pedido.setPedidoResponse(pedidoResponse);
         return pedido;
 
+    }
+
+    private Cliente buscarCliente(int iDCliente){
+        return clienteService.consultarCliente(iDCliente);
+    }
+
+    private PedidoVendaProdutoLista incluirClienteListaPedido(PedidoVendaProdutoLista pedidoVendaProdutoLista){
+        ArrayList<PedidoResponse> lista = new ArrayList<>();
+        for(PedidoResponse pedido : pedidoVendaProdutoLista.getPedidoVendaProduto()){
+            pedido.setCliente(buscarCliente(pedido.getCabecalho().getCodigoCliente()));
+            lista.add(pedido);
+        }
+        PedidoVendaProdutoLista novoPedidoVendaProdutoLista = new PedidoVendaProdutoLista();
+        novoPedidoVendaProdutoLista.setPedidoVendaProduto(lista);
+        return novoPedidoVendaProdutoLista;
     }
 
 }

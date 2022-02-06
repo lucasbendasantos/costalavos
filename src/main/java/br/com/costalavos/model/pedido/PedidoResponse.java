@@ -21,6 +21,9 @@ public class PedidoResponse {
     @JsonProperty("frete")
     private Frete frete;
 
+    @JsonProperty("cliente")
+    private Cliente cliente;
+
     public Cabecalho getCabecalho() {
         return cabecalho;
     }
@@ -51,5 +54,13 @@ public class PedidoResponse {
 
     public void setFrete(Frete frete) {
         this.frete = frete;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

@@ -7,19 +7,8 @@ import java.util.ArrayList;
 
 public class PedidoVendaProduto {
 
-    @JsonProperty("cliente")
-    private Cliente cliente;
-
     @JsonProperty("pedido_venda_produto")
     private PedidoResponse pedidoResponse;
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 
     public PedidoResponse getPedidoResponse() {
         return pedidoResponse;
