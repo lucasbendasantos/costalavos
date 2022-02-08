@@ -26,8 +26,8 @@ public class PedidoController {
     }
 
     @GetMapping
-    public ResponseEntity<PedidoVendaProduto> consultarPedido(@RequestParam("codigo_pedido") BigInteger codigoPedido){
-        return ResponseEntity.ok(service.consultarPedido(codigoPedido));
+    public ResponseEntity<PedidoVendaProduto> consultarPedido(@RequestParam("numero_pedido") BigInteger numeroPedido){
+        return ResponseEntity.ok(service.consultarPedido(numeroPedido));
     }
 
 }
