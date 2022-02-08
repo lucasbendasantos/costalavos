@@ -80,7 +80,7 @@ public class PedidoService {
     }
 
     valorTotalCliente = valorAberto + totalPedido.getValorTotalPedido();
-    DecimalFormat df = new DecimalFormat("#,###.00");
+    DecimalFormat df = new DecimalFormat("#.##");
 
     totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente)));
     totalPedido.setValorAberto(Double.valueOf(df.format(valorAberto)));
