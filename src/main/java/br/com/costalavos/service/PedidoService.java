@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -79,9 +80,10 @@ public class PedidoService {
     }
 
     valorTotalCliente = valorAberto + totalPedido.getValorTotalPedido();
+    DecimalFormat df = new DecimalFormat("#,###.00");
 
-    totalPedido.setValorTotalCliente(valorTotalCliente);
-    totalPedido.setValorAberto(valorAberto);
+    totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente)));
+    totalPedido.setValorAberto(Double.valueOf(df.format(valorAberto)));
     return totalPedido;
   }
 
