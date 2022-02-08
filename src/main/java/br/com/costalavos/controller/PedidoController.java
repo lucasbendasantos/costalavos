@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -24,7 +26,7 @@ public class PedidoController {
     }
 
     @GetMapping
-    public ResponseEntity<PedidoVendaProduto> consultarPedido(@RequestParam("codigo_pedido") int codigoPedido){
+    public ResponseEntity<PedidoVendaProduto> consultarPedido(@RequestParam("codigo_pedido") BigInteger codigoPedido){
         return ResponseEntity.ok(service.consultarPedido(codigoPedido));
     }
 

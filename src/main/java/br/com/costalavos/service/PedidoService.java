@@ -27,8 +27,8 @@ public class PedidoService {
         return incluirClienteListaPedido(listaPedido);
     }
 
-    public PedidoVendaProduto consultarPedido(int codigoPedido){
-        HashMap<String, Integer> request = new HashMap<String, Integer>();
+    public PedidoVendaProduto consultarPedido(BigInteger codigoPedido){
+        HashMap<String, BigInteger> request = new HashMap<String, BigInteger>();
         request.put("codigo_pedido", codigoPedido);
 
         PedidoVendaProduto pedido = (PedidoVendaProduto) httpClient.post("/produtos/pedido/", request, "ConsultarPedido", PedidoVendaProduto.class).getBody();
