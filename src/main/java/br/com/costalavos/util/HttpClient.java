@@ -31,6 +31,7 @@ public class HttpClient {
         credenciais.put("app_key", appKey);
         credenciais.put("app_secret", appSecret);
 
+
         listParam.add(request);
         credenciais.put("param",listParam);
 

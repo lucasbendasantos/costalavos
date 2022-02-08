@@ -4,36 +4,58 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TotalPedido {
 
-    @JsonProperty("valor_descontos")
-    private double valorDescontos;
+  @JsonProperty("valor_descontos")
+  private double valorDescontos;
 
-    @JsonProperty("valor_mercadorias")
-    private double valorMercadorias;
+  @JsonProperty("valor_mercadorias")
+  private double valorMercadorias;
 
-    @JsonProperty("valor_total_pedido")
-    private double valorTotalPedido;
+  @JsonProperty("valor_total_pedido")
+  private double valorTotalPedido;
 
-    public double getValorDescontos() {
-        return valorDescontos;
-    }
+  @JsonProperty("valor_aberto")
+  private double valorAberto;
 
-    public void setValorDescontos(double valorDescontos) {
-        this.valorDescontos = valorDescontos;
-    }
+  @JsonProperty("valor_total_cliente")
+  private double valorTotalCliente;
 
-    public double getValorMercadorias() {
-        return valorMercadorias;
-    }
+  public double getValorAberto() {
+    return valorAberto;
+  }
 
-    public void setValorMercadorias(double valorMercadorias) {
-        this.valorMercadorias = valorMercadorias;
-    }
+  public void setValorAberto(double valorAberto) {
+    this.valorAberto = valorAberto;
+  }
 
-    public double getValorTotalPedido() {
-        return valorTotalPedido;
-    }
+  public double getValorTotalCliente() {
+    return valorTotalCliente;
+  }
 
-    public void setValorTotalPedido(double valorTotalPedido) {
-        this.valorTotalPedido = valorTotalPedido;
-    }
+  public void setValorTotalCliente(double valorTotalCliente) {
+    this.valorTotalCliente = valorTotalCliente;
+  }
+
+  public double getValorDescontos() {
+    return valorDescontos;
+  }
+
+  public void setValorDescontos(double valorDescontos) {
+    this.valorDescontos = valorDescontos;
+  }
+
+  public double getValorMercadorias() {
+    return valorMercadorias;
+  }
+
+  public void setValorMercadorias(double valorMercadorias) {
+    this.valorMercadorias = valorMercadorias;
+  }
+
+  public double getValorTotalPedido() {
+    return valorTotalPedido;
+  }
+
+  public void setValorTotalPedido(double valorTotalPedido) {
+    this.valorTotalPedido = valorTotalPedido;
+  }
 }
