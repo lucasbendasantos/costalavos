@@ -2,6 +2,8 @@ package br.com.costalavos.model.pedido;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigInteger;
+
 public class Frete {
 
     @JsonProperty("codigo_rastreio")
@@ -11,7 +13,7 @@ public class Frete {
     private int codigoTipoEntrega;
 
     @JsonProperty("codigo_transportadora")
-    private int codigoTransportadora;
+    private BigInteger codigoTransportadora;
 
     @JsonProperty("especie_volumes")
     private String especieVolumes;
@@ -77,11 +79,11 @@ public class Frete {
         this.codigoTipoEntrega = codigoTipoEntrega;
     }
 
-    public int getCodigoTransportadora() {
+    public BigInteger getCodigoTransportadora() {
         return codigoTransportadora;
     }
 
-    public void setCodigoTransportadora(int codigoTransportadora) {
+    public void setCodigoTransportadora(BigInteger codigoTransportadora) {
         this.codigoTransportadora = codigoTransportadora;
     }
 

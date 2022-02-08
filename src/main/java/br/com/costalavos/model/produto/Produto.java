@@ -2,6 +2,8 @@ package br.com.costalavos.model.produto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigInteger;
+
 public class Produto {
 
     private String cfop;
@@ -12,10 +14,10 @@ public class Produto {
     private String codigo;
 
     @JsonProperty("codigo_produto")
-    private int codigoProduto;
+    private BigInteger codigoProduto;
 
     @JsonProperty("codigo_tabela_preco")
-    private int codigoTabelaPreco;
+    private BigInteger codigoTabelaPreco;
 
     private String descricao;
     private String ean;
@@ -82,19 +84,19 @@ public class Produto {
         this.codigo = codigo;
     }
 
-    public int getCodigoProduto() {
+    public BigInteger getCodigoProduto() {
         return codigoProduto;
     }
 
-    public void setCodigoProduto(int codigoProduto) {
+    public void setCodigoProduto(BigInteger codigoProduto) {
         this.codigoProduto = codigoProduto;
     }
 
-    public int getCodigoTabelaPreco() {
+    public BigInteger getCodigoTabelaPreco() {
         return codigoTabelaPreco;
     }
 
-    public void setCodigoTabelaPreco(int codigoTabelaPreco) {
+    public void setCodigoTabelaPreco(BigInteger codigoTabelaPreco) {
         this.codigoTabelaPreco = codigoTabelaPreco;
     }
 

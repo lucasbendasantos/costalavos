@@ -9,6 +9,7 @@ import br.com.costalavos.util.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,7 +41,7 @@ public class PedidoService {
 
     }
 
-    private Cliente buscarCliente(int iDCliente){
+    private Cliente buscarCliente(BigInteger iDCliente){
         return clienteService.consultarCliente(iDCliente);
     }
 

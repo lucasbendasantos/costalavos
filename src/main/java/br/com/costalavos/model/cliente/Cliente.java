@@ -2,10 +2,12 @@ package br.com.costalavos.model.cliente;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigInteger;
+
 public class Cliente {
 
     @JsonProperty("codigo_cliente_omie")
-    private int codigoClienteOmie;
+    private BigInteger codigoClienteOmie;
 
     @JsonProperty("razao_social")
     private String razaoSocial;
@@ -49,11 +51,11 @@ public class Cliente {
     @JsonProperty("inscricao_estadual")
     private String inscricaoEstadual;
 
-    public int getCodigoClienteOmie() {
+    public BigInteger getCodigoClienteOmie() {
         return codigoClienteOmie;
     }
 
-    public void setCodigoClienteOmie(int codigoClienteOmie) {
+    public void setCodigoClienteOmie(BigInteger codigoClienteOmie) {
         this.codigoClienteOmie = codigoClienteOmie;
     }
 

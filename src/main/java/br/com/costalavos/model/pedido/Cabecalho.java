@@ -2,6 +2,8 @@ package br.com.costalavos.model.pedido;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigInteger;
+
 public class Cabecalho {
 
     private char bloqueado;
@@ -10,19 +12,19 @@ public class Cabecalho {
     private String codigoCenarioImpostos;
 
     @JsonProperty("codigo_cliente")
-    private int codigoCliente;
+    private BigInteger codigoCliente;
 
     @JsonProperty("codigo_empresa")
-    private int codigoEmpresa;
+    private BigInteger codigoEmpresa;
 
     @JsonProperty("codigo_parcela")
     private String codigoParcela;
 
     @JsonProperty("codigo_pedido")
-    private int codigoPedido;
+    private BigInteger codigoPedido;
 
     @JsonProperty("codigo_pedido_integracao")
-    private int codigoPedidoIntegracao;
+    private BigInteger codigoPedidoIntegracao;
 
     @JsonProperty("data_previsao")
     private String dataPrevisao;
@@ -60,19 +62,19 @@ public class Cabecalho {
         this.codigoCenarioImpostos = codigoCenarioImpostos;
     }
 
-    public int getCodigoCliente() {
+    public BigInteger getCodigoCliente() {
         return codigoCliente;
     }
 
-    public void setCodigoCliente(int codigoCliente) {
+    public void setCodigoCliente(BigInteger codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
 
-    public int getCodigoEmpresa() {
+    public BigInteger getCodigoEmpresa() {
         return codigoEmpresa;
     }
 
-    public void setCodigoEmpresa(int codigoEmpresa) {
+    public void setCodigoEmpresa(BigInteger codigoEmpresa) {
         this.codigoEmpresa = codigoEmpresa;
     }
 
@@ -84,19 +86,19 @@ public class Cabecalho {
         this.codigoParcela = codigoParcela;
     }
 
-    public int getCodigoPedido() {
+    public BigInteger getCodigoPedido() {
         return codigoPedido;
     }
 
-    public void setCodigoPedido(int codigoPedido) {
+    public void setCodigoPedido(BigInteger codigoPedido) {
         this.codigoPedido = codigoPedido;
     }
 
-    public int getCodigoPedidoIntegracao() {
+    public BigInteger getCodigoPedidoIntegracao() {
         return codigoPedidoIntegracao;
     }
 
-    public void setCodigoPedidoIntegracao(int codigoPedidoIntegracao) {
+    public void setCodigoPedidoIntegracao(BigInteger codigoPedidoIntegracao) {
         this.codigoPedidoIntegracao = codigoPedidoIntegracao;
     }
 
