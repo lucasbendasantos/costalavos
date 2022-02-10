@@ -64,6 +64,11 @@ public class PedidoService {
     ArrayList<PedidoResponse> lista = new ArrayList<>();
     for (PedidoResponse pedido : pedidoVendaProdutoLista.getPedidoVendaProduto()) {
       pedido.setCliente(buscarCliente(pedido.getCabecalho().getCodigoCliente()));
+
+      TitulosEncontrados titulosEncontrados = lancamentosService.buscarLancamentosPorCNPJ(pedido.getCliente().getCnpjCpf());
+
+      TotalPedido totalPedido = geraTotalPedidoCliente(pedido.getTotalPedido(), titulosEncontrados);
+      pedido.setTotalPedido(totalPedido);
       lista.add(pedido);
     }
     PedidoVendaProdutoLista novoPedidoVendaProdutoLista = new PedidoVendaProdutoLista();
