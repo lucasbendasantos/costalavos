@@ -1,11 +1,11 @@
 package br.com.costalavos.model.lancamentos;
 
-import br.com.costalavos.model.paginacao.PaginacaoResponse;
+import br.com.costalavos.model.paginacao.PaginacaoResponseTitulos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
-public class TitulosEncontrados extends PaginacaoResponse {
+public class TitulosEncontrados extends PaginacaoResponseTitulos {
 
   @JsonProperty("titulosEncontrados")
   private ArrayList<ResumoList> titulosEncontrados;

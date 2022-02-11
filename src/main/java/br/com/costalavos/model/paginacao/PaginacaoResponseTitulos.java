@@ -2,18 +2,18 @@ package br.com.costalavos.model.paginacao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PaginacaoResponse {
+public class PaginacaoResponseTitulos {
 
-  @JsonProperty("pagina")
+  @JsonProperty("nPagina")
   private int numeroPagina;
 
-  @JsonProperty("total_de_paginas")
+  @JsonProperty("nTotPaginas")
   private int numeroTotalPaginas;
 
-  @JsonProperty("registros")
+  @JsonProperty("nRegistros")
   private int numeroRegistros;
 
-  @JsonProperty("total_de_registros")
+  @JsonProperty("nTotRegistros")
   private int numeroTotalRegistros;
 
   public int getNumeroPagina() {

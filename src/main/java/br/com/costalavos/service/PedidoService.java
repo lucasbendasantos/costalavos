@@ -73,6 +73,10 @@ public class PedidoService {
     }
     PedidoVendaProdutoLista novoPedidoVendaProdutoLista = new PedidoVendaProdutoLista();
     novoPedidoVendaProdutoLista.setPedidoVendaProduto(lista);
+    novoPedidoVendaProdutoLista.setNumeroPagina(pedidoVendaProdutoLista.getNumeroPagina());
+    novoPedidoVendaProdutoLista.setNumeroRegistros(pedidoVendaProdutoLista.getNumeroRegistros());
+    novoPedidoVendaProdutoLista.setNumeroTotalPaginas(pedidoVendaProdutoLista.getNumeroTotalPaginas());
+    novoPedidoVendaProdutoLista.setNumeroTotalRegistros(pedidoVendaProdutoLista.getNumeroTotalRegistros());
     return novoPedidoVendaProdutoLista;
   }
 
