@@ -1,6 +1,7 @@
 package br.com.costalavos.controller;
 
 import br.com.costalavos.model.paginacao.Paginacao;
+import br.com.costalavos.model.pedido.PedidoRequest;
 import br.com.costalavos.model.pedido.PedidoResponse;
 import br.com.costalavos.model.pedido.PedidoVendaProduto;
 import br.com.costalavos.model.pedido.PedidoVendaProdutoLista;
@@ -21,8 +22,8 @@ public class PedidoController {
     PedidoService service;
 
     @PostMapping
-    public ResponseEntity<PedidoVendaProdutoLista> listarTodos(@RequestBody Paginacao paginacao){
-        return ResponseEntity.ok(service.listarTodos(paginacao));
+    public ResponseEntity<PedidoVendaProdutoLista> listarTodos(@RequestBody PedidoRequest pedidoRequest){
+        return ResponseEntity.ok(service.listarTodos(pedidoRequest));
     }
 
     @GetMapping

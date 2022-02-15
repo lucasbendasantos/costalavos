@@ -1,14 +1,11 @@
 package br.com.costalavos.service;
 
 import br.com.costalavos.model.cliente.Cliente;
-import br.com.costalavos.model.lancamentos.ResumoLancamento;
+import br.com.costalavos.model.cliente.ClientesCadastroResumido;
 import br.com.costalavos.model.lancamentos.ResumoList;
 import br.com.costalavos.model.lancamentos.TitulosEncontrados;
-import br.com.costalavos.model.paginacao.Paginacao;
-import br.com.costalavos.model.pedido.PedidoResponse;
-import br.com.costalavos.model.pedido.PedidoVendaProduto;
-import br.com.costalavos.model.pedido.PedidoVendaProdutoLista;
-import br.com.costalavos.model.pedido.TotalPedido;
+import br.com.costalavos.model.pedido.*;
+import br.com.costalavos.model.projeto.Projeto;
 import br.com.costalavos.util.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,9 +27,41 @@ public class PedidoService {
   @Autowired
   LancamentosService lancamentosService;
 
-  public PedidoVendaProdutoLista listarTodos(Paginacao paginacao) {
-    PedidoVendaProdutoLista listaPedido = (PedidoVendaProdutoLista) httpClient.post("/produtos/pedido/", paginacao, "ListarPedidos", PedidoVendaProdutoLista.class).getBody();
-    return incluirClienteListaPedido(listaPedido);
+  @Autowired
+  ProjetoService projetoService;
+
+  public PedidoVendaProdutoLista listarTodos(PedidoRequest pedidoRequest) {
+    try {
+      ClientesCadastroResumido clientesCadastroResumido = clienteService.consultarClienteResumido(pedidoRequest.getNome_fantasia());
+
+      HashMap<String, Object> params = new HashMap<>();
+      params.put("pagina", pedidoRequest.getPagina());
+      params.put("registros_por_pagina", pedidoRequest.getRegistros_por_pagina());
+      params.put("apenas_importado_api", pedidoRequest.getApenas_importado_api());
+
+      if (!isEmptyOrNull(pedidoRequest.getNumero_pedido_de())) {
+        params.put("numero_pedido_de", pedidoRequest.getNumero_pedido_de());
+      }
+
+      if (!isEmptyOrNull(pedidoRequest.getNumero_pedido_ate())) {
+        params.put("numero_pedido_ate", pedidoRequest.getNumero_pedido_ate());
+      }
+
+      if (!isEmptyOrNull(pedidoRequest.getNome_fantasia())) {
+        if (clientesCadastroResumido != null) {
+          if (clientesCadastroResumido.getClientesCadastroResumido().get(0).getNomeFantasia().contains(pedidoRequest.getNome_fantasia())) {
+            params.put("filtrar_por_cliente", clientesCadastroResumido.getClientesCadastroResumido().get(0).getCodigoCliente());
+          }
+        }
+      }
+
+
+      PedidoVendaProdutoLista listaPedido = (PedidoVendaProdutoLista) httpClient.post("/produtos/pedido/", params, "ListarPedidos", PedidoVendaProdutoLista.class).getBody();
+      return incluirClienteListaPedido(listaPedido);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return new PedidoVendaProdutoLista();
+    }
   }
 
   public PedidoVendaProduto consultarPedido(BigInteger numeroPedido) {
@@ -69,6 +98,17 @@ public class PedidoService {
 
       TotalPedido totalPedido = geraTotalPedidoCliente(pedido.getTotalPedido(), titulosEncontrados);
       pedido.setTotalPedido(totalPedido);
+
+      Projeto projeto = projetoService.buscarProjetoByCodigo(pedido.getInformacoesAdicionais().getCodigoProjeto());
+
+      InformacoesAdicionais informacoesAdicionais = new InformacoesAdicionais();
+      informacoesAdicionais.setInativo(projeto.getInativo());
+      informacoesAdicionais.setCodigoInt(projeto.getCodigoInt());
+      informacoesAdicionais.setCodigoProjeto(projeto.getCodigo());
+      informacoesAdicionais.setNome(projeto.getNome());
+
+      pedido.setInformacoesAdicionais(informacoesAdicionais);
+
       lista.add(pedido);
     }
     PedidoVendaProdutoLista novoPedidoVendaProdutoLista = new PedidoVendaProdutoLista();
@@ -90,9 +130,19 @@ public class PedidoService {
 
     valorTotalCliente = valorAberto + totalPedido.getValorTotalPedido();
     DecimalFormat df = new DecimalFormat("#.##");
-     totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente).replaceAll(",", ".")));
+    totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente).replaceAll(",", ".")));
     totalPedido.setValorAberto(Double.valueOf(df.format(valorAberto).replaceAll(",", ".")));
     return totalPedido;
+  }
+
+  private boolean isEmptyOrNull(String str) {
+    if (str != null) {
+      if (!str.isEmpty() || str.length() != 0 || !str.equalsIgnoreCase("")) {
+        return false;
+      }
+      return true;
+    }
+    return true;
   }
 
 }
