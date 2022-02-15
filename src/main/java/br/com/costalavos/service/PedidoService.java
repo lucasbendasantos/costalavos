@@ -49,7 +49,7 @@ public class PedidoService {
 
       if (!isEmptyOrNull(pedidoRequest.getNome_fantasia())) {
         if (clientesCadastroResumido != null) {
-          if (clientesCadastroResumido.getClientesCadastroResumido().get(0).getNomeFantasia().contains(pedidoRequest.getNome_fantasia())) {
+          if (clientesCadastroResumido.getClientesCadastroResumido().get(0).getNomeFantasia().toUpperCase().contains(pedidoRequest.getNome_fantasia().toUpperCase())) {
             params.put("filtrar_por_cliente", clientesCadastroResumido.getClientesCadastroResumido().get(0).getCodigoCliente());
           }
         }
