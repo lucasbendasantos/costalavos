@@ -38,6 +38,7 @@ public class PedidoService {
       params.put("pagina", pedidoRequest.getPagina());
       params.put("registros_por_pagina", pedidoRequest.getRegistros_por_pagina());
       params.put("apenas_importado_api", pedidoRequest.getApenas_importado_api());
+      params.put("ordem_descrescente", "S");
 
       if (!isEmptyOrNull(pedidoRequest.getNumero_pedido_de())) {
         params.put("numero_pedido_de", pedidoRequest.getNumero_pedido_de());
