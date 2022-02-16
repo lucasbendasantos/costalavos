@@ -8,6 +8,7 @@ import br.com.costalavos.model.pedido.*;
 import br.com.costalavos.model.projeto.Projeto;
 import br.com.costalavos.util.HttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -17,6 +18,12 @@ import java.util.HashMap;
 
 @Service
 public class PedidoService {
+
+  @Value("${omie.apenasFR}")
+  private boolean apenasFR;
+
+  @Value("${omie.codigoEtapaFR}")
+  private String codigoEtapaFR;
 
   @Autowired
   HttpClient httpClient;
@@ -30,6 +37,7 @@ public class PedidoService {
   @Autowired
   ProjetoService projetoService;
 
+
   public PedidoVendaProdutoLista listarTodos(PedidoRequest pedidoRequest) {
     try {
       ClientesCadastroResumido clientesCadastroResumido = clienteService.consultarClienteResumido(pedidoRequest.getNome_fantasia());
@@ -39,6 +47,10 @@ public class PedidoService {
       params.put("registros_por_pagina", pedidoRequest.getRegistros_por_pagina());
       params.put("apenas_importado_api", pedidoRequest.getApenas_importado_api());
       params.put("ordem_descrescente", "S");
+
+      if(apenasFR){
+        params.put("etapa", codigoEtapaFR);
+      }
 
       if (!isEmptyOrNull(pedidoRequest.getNumero_pedido_de())) {
         params.put("numero_pedido_de", pedidoRequest.getNumero_pedido_de());
@@ -107,7 +119,7 @@ public class PedidoService {
     for (PedidoResponse pedido : pedidoVendaProdutoLista.getPedidoVendaProduto()) {
       pedido.setCliente(buscarCliente(pedido.getCabecalho().getCodigoCliente()));
 
-      TitulosEncontrados titulosEncontrados = lancamentosService.buscarLancamentosPorCNPJ(pedido.getCliente().getCnpjCpf());
+      TitulosEncontrados titulosEncontrados = lancamentosService.buscarLancamentosPorCodCliente(pedido.getCliente().getCodigoClienteOmie());
 
       TotalPedido totalPedido = geraTotalPedidoCliente(pedido.getTotalPedido(), titulosEncontrados);
       pedido.setTotalPedido(totalPedido);
