@@ -76,10 +76,22 @@ public class PedidoService {
 
     TotalPedido totalPedido = geraTotalPedidoCliente(pedido.getPedidoResponse().getTotalPedido(), titulosEncontrados);
 
+    InformacoesAdicionais informacoesAdicionais = new InformacoesAdicionais();
+
+    //Verificação necessária pois alguns projetos estam vindo com codigo 0
+    if(pedido.getPedidoResponse().getInformacoesAdicionais().getCodigoProjeto() != BigInteger.valueOf(0)){
+      Projeto projeto = projetoService.buscarProjetoByCodigo(pedido.getPedidoResponse().getInformacoesAdicionais().getCodigoProjeto());
+      informacoesAdicionais.setInativo(projeto.getInativo());
+      informacoesAdicionais.setCodigoInt(projeto.getCodigoInt());
+      informacoesAdicionais.setCodigoProjeto(projeto.getCodigo());
+      informacoesAdicionais.setNome(projeto.getNome());
+    }
+
 
     PedidoResponse pedidoResponse = pedido.getPedidoResponse();
     pedidoResponse.setTotalPedido(totalPedido);
     pedidoResponse.setCliente(cliente);
+    pedidoResponse.setInformacoesAdicionais(informacoesAdicionais);
     pedido.setPedidoResponse(pedidoResponse);
     return pedido;
 
