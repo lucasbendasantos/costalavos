@@ -48,6 +48,12 @@ public class PedidoService {
       params.put("apenas_importado_api", pedidoRequest.getApenas_importado_api());
       params.put("ordem_descrescente", "S");
 
+      if(!isEmptyOrNull(pedidoRequest.getData_de()) && !isEmptyOrNull(pedidoRequest.getData_ate())){
+        params.put("filtrar_por_data_de", pedidoRequest.getData_de());
+        params.put("filtrar_por_data_ate", pedidoRequest.getData_ate());
+        params.put("filtrar_apenas_inclusao", "S");
+      }
+
       if(apenasFR){
         params.put("etapa", codigoEtapaFR);
       }
@@ -156,7 +162,7 @@ public class PedidoService {
       valorAberto += resumo.getResumo().getNumeroValorAberto();
     }
 
-    valorTotalCliente = valorAberto + totalPedido.getValorTotalPedido();
+    valorTotalCliente = valorAberto - totalPedido.getValorTotalPedido();
     DecimalFormat df = new DecimalFormat("#.##");
     totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente).replaceAll(",", ".")));
     totalPedido.setValorAberto(Double.valueOf(df.format(valorAberto).replaceAll(",", ".")));

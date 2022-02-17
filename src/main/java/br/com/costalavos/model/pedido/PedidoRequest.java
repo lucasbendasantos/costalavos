@@ -14,6 +14,12 @@ public class PedidoRequest extends Paginacao {
   @JsonProperty("nome_fantasia")
   private String nome_fantasia;
 
+  @JsonProperty("data_de")
+  private String data_de;
+
+  @JsonProperty("data_ate")
+  private String data_ate;
+
   public String getNumero_pedido_de() {
     return numero_pedido_de;
   }
@@ -36,5 +42,21 @@ public class PedidoRequest extends Paginacao {
 
   public void setNome_fantasia(String nome_fantasia) {
     this.nome_fantasia = nome_fantasia;
+  }
+
+  public String getData_de() {
+    return data_de;
+  }
+
+  public void setData_de(String data_de) {
+    this.data_de = data_de;
+  }
+
+  public String getData_ate() {
+    return data_ate;
+  }
+
+  public void setData_ate(String data_ate) {
+    this.data_ate = data_ate;
   }
 }
