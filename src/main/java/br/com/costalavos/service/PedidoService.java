@@ -162,7 +162,8 @@ public class PedidoService {
       valorAberto += resumo.getResumo().getNumeroValorAberto();
     }
 
-    valorTotalCliente = valorAberto - totalPedido.getValorTotalPedido();
+    valorAberto = valorAberto - totalPedido.getValorTotalPedido();
+    valorTotalCliente = valorAberto + totalPedido.getValorTotalPedido();
     DecimalFormat df = new DecimalFormat("#.##");
     totalPedido.setValorTotalCliente(Double.valueOf(df.format(valorTotalCliente).replaceAll(",", ".")));
     totalPedido.setValorAberto(Double.valueOf(df.format(valorAberto).replaceAll(",", ".")));
